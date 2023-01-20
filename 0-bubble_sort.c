@@ -8,7 +8,7 @@
  */
 void bubble_sort(int *array, size_t size)
 {
-	size_t i, j, temp;
+	size_t i, j;
 
 	if (size < 2)
 		return;
@@ -19,9 +19,9 @@ void bubble_sort(int *array, size_t size)
 		{
 			if (array[j] > array[j + 1])
 			{
-				temp = array[j];
-				array[j] = array[j + 1];
-				array[j + 1] = temp;
+				array[j] = array[j] ^ array[j + 1];
+				array[j + 1] = array[j] ^ array[j + 1];
+				array[j] = array[j] ^ array[j + 1];
 				print_array(array, size);
 			}
 		}
