@@ -1,82 +1,55 @@
 #include "sort.h"
 
 /**
- * sort_func - a helper function that sorts a doubly linked list of integers
- * @ptr: a double pointer to the list of integers
- * @list: the address of a pointer to the head of the list
- * Return: an integer as a flag
+ * swap - swaps 2 nodes in a doubly-linked list
+ * @a: address of first node
+ * @b: address of second node
+ *
+ * Return: void
  */
-int sort_func(listint_t *ptr, listint_t **list)
+void swap(listint_t *a, listint_t *b)
 {
-	listint_t *temp;
-	int swap_occured = 0;
+	if (a->prev)
+		a->prev->next = b;
+	if (b->next)
+		b->next->prev = a;
+	a->next = b->next;
+	b->prev = a->prev;
+	a->prev = b;
+	b->next = a;
 
-	temp = ptr->next;
-	while (ptr != NULL)
-	{
-		/* insert before the first node */
-		if (ptr->prev == NULL && temp->n < ptr->n)
-		{
-			if (temp->next)
-				temp->next->prev = temp->prev;
-			temp->prev->next = temp->next;
-
-			temp->next = ptr;
-			temp->prev = NULL;
-			ptr->prev = temp;
-			*list = temp;
-			print_list((const listint_t *)*list);
-			return (0);
-		}
-
-		if (ptr->prev == NULL && ptr->n > temp->n)
-		{
-			/* first node of list is greater than temp->n */
-			ptr->next = temp->next;
-			temp->next = ptr;
-			ptr->next->prev = ptr;
-			temp->prev = ptr->prev;
-			ptr->prev = temp;
-
-			ptr = ptr->prev; /* ptr now points to temp */
-			swap_occured = 1;
-			print_list((const listint_t *)*list);
-			continue;
-		}
-
-		ptr = ptr->prev;/*ptr now points to the node before temp*/
-	}
-	return (swap_occured);
 }
 
 /**
- * insertion_sort_list - a function that sorts a linked list in ascending
- * order using insertion sort algorithm
- * @list: a double pointer to the list to be sorted
+ * insertion_sort_list - insertion sorts a doubly-linked list
+ * @list: address of pointer to head node
+ *
  * Return: void
  */
 void insertion_sort_list(listint_t **list)
 {
-	listint_t *ptr, *temp;
-	int n;
+	listint_t *i, *j;
 
-	if (list == NULL || *list == NULL)
+	if (!list || !*list || !(*list)->next)
 		return;
-
-	/* check if only one element is on the list */
-	if ((*list)->prev == NULL && (*list)->next == NULL)
-		return;
-
-	/* TODO: If checker fails, try rewinding the doubly linked list. */
-
-	ptr = *list;
-
-	while (ptr != NULL)
+	i = (*list)->next;
+	while (i)
 	{
-		temp = ptr->next;
-		n = sort_func(ptr, list);
-		if (n == 1)
-			break;
-		ptr = temp;
+		j = i;
+		i = i->next;
+		while (j && j->prev)
+		{
+			if (j->prev->n > j->n)
+			{
+				swap(j->prev, j);
+				if (!j->prev)
+					*list = j;
+				print_list((const listint_t *)*list);
+			}
+			else
+				j = j->prev;
+		}
+
 	}
 }
+
