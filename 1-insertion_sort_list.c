@@ -3,6 +3,8 @@
 /**
  * sort_func - a helper function that sorts a doubly linked list of integers
  * @ptr: a double pointer to the list of integers
+ * @list: the address of a pointer to the head of the list
+ * Return: an integer as a flag
  */
 int sort_func(listint_t *ptr, listint_t **list)
 {
