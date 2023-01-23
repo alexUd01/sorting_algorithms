@@ -9,24 +9,27 @@
 void selection_sort(int *array, size_t size)
 {
 	size_t i, j;
-	size_t new_min, temp;
+	size_t new_min_pos, temp;
+
+	if (array == NULL || size < 2)
+		return;
 
 	for (i = 0; i < size - 1; i++)
 	{
-		new_min = i;
+		/* initialize min to the first element of the array */
+		new_min_pos = i;
+		/* search for a new minimum element in the array */
 		for (j = i + 1; j < size; j++)
-		{
-			if (array[j] < array[new_min])
-			{
-				new_min = j;
-			}
-		}
+			if (array[j] < array[new_min_pos])
+				new_min_pos = j;
 
-		if (new_min != i)
+		/* perform swap if a new minimum element was found */
+		if (new_min_pos != i)
 		{
 			temp = array[i];
-			array[i] = array[new_min];
-			array[new_min] = temp;
+			array[i] = array[new_min_pos];
+			array[new_min_pos] = temp;
+			/* print the current state of the array */
 			print_array(array, size);
 		}
 	}
