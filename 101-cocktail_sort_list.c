@@ -3,8 +3,8 @@
 /**
  * swap_nodes - a helper function that swaps two adjacent nodes of a doubly
  *              linked list.
- * @ptr1: a pointer to a node
- * @ptr2: a pointer to the second node
+ * @ptr: a pointer to a node
+ * @head: the address of the first node of the list
  * Return: returns the address of the swapped node
  */
 listint_t *swap_nodes(listint_t *ptr, listint_t **head)
@@ -28,7 +28,7 @@ listint_t *swap_nodes(listint_t *ptr, listint_t **head)
 }
 
 /**
- * coctail_sort_list - a function that sorts a list in ascending order using
+ * cocktail_sort_list - a function that sorts a list in ascending order using
  *                     coctail shaker sorting algorithm.
  * @list: the list to be sorted.
  */
@@ -56,7 +56,6 @@ void cocktail_sort_list(listint_t **list)
 		}
 		if (!swapped)
 			break;
-
 		/* backward traversal */
 		swapped = 0;
 		while (ptr != NULL)
@@ -71,7 +70,6 @@ void cocktail_sort_list(listint_t **list)
 		}
 		if (!swapped)
 			break;
-
 		/* ptr is now == NULL. Reinitialize it to first node */
 		ptr = *list;
 
