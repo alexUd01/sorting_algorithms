@@ -1,11 +1,12 @@
 #include "deck.h"
 
 /**
- * swap - swaps 2 nodes in a doubly-linked list
- * @a: address of first node
- * @b: address of second node
- * Return: void
- */
+*swap - swaps 2 nodes in a doubly-linked list
+*@a: address of first node
+*@b: address of second node
+*
+*Return: void
+*/
 void swap(deck_node_t *a, deck_node_t *b)
 {
 	if (a->prev)
@@ -51,20 +52,22 @@ void insertion_sort_list(deck_node_t **list)
 }
 
 /**
- * sort_deck - sorts the deck by a given sort function
- * @deck: address to pointer of head
- */
+* sort_deck - sorts the deck by a given sort function
+* @deck: address to pointer of head
+*
+*/
 void sort_deck(deck_node_t **deck)
 {
 	insertion_sort_list(deck);
 }
 
 /**
- * less_than - determines comparison order between two cards
- * @a: pointer of first card
- * @b: pointer of second card
- * Return: true if a > b
- */
+* less_than - determines comparison order between two cards
+* @a: pointer of first card
+* @b: pointer of second card
+*
+* Return: true if a > b
+*/
 int less_than(const card_t *a, const card_t *b)
 {
 	char *s1, *s2, *values[] = {"King", "Queen", "Jack", "10", "9", "8",
